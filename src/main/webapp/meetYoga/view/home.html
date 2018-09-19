@@ -1,0 +1,116 @@
+<script>
+    $(function() {
+        $('.swiper-container').swiper({
+            loop: true,
+            autoplay: 3000
+        });
+
+        $(document).off('click', '.yoga-open-popup').on('click', '.yoga-open-popup', function() {
+            var param = "id="+$(this).data('notification-id');
+            callAjax('/websiteService/getNotificationById', '', 'notificationOpenPopup', '', '', param, '');
+        });
+
+        $('.weui-grid').on('click', function() {
+            $('#tabbar .weui-tab__bd-item--content').load($(this).data("target"));
+        });
+
+        getTop5Notification();
+});
+</script>
+
+<!-- Title -->
+<div class="yoga-home-title">
+    <img src="res/img/logo.png" style="height:2rem;">
+</div>
+
+<!-- Swiper -->
+<div class="swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide"><img src="res/img/swiper-1.jpg"/></div>
+        <div class="swiper-slide"><img src="res/img/swiper-2.jpg"/></div>
+        <div class="swiper-slide"><img src="res/img/swiper-3.jpg"/></div>
+        <div class="swiper-slide"><img src="res/img/swiper-4.jpg"/></div>
+        <div class="swiper-slide"><img src="res/img/swiper-5.jpg"/></div>
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+</div>
+
+
+<!-- Notification -->
+<div class="weui-panel weui-panel_access">
+    <div class="weui-panel__hd">最新公告</div>
+    <div class="yoga-home-notification">
+        <div class="weui-panel__ft">
+            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd auto-clip yoga-open-popup">
+                    暂时没有任何公告
+                </div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Introduction Grids  -->
+<div style="padding:20px;background-color:#FFFFFF;margin-top:10px;">
+    <div class="weui-grids">
+        <a class="weui-grid js_grid" data-target="mobileView/venue.html">
+            <div class="weui-grid__icon" style="width:48px;height:48px;">
+                <img src="res/img/venue.png" alt="">
+            </div>
+            <p class="weui-grid__label">场馆介绍</p>
+        </a>
+        <a class="weui-grid js_grid" data-target="mobileView/course.html">
+            <div class="weui-grid__icon" style="width:48px;height:48px;">
+                <img src="res/img/course.png" alt="">
+            </div>
+            <p class="weui-grid__label">精品课程</p>
+        </a>
+        <a class="weui-grid js_grid" data-target="mobileView/teacher.html">
+            <div class="weui-grid__icon" style="width:48px;height:48px;">
+                <img src="res/img/teacher.png" alt="">
+            </div>
+            <p class="weui-grid__label">金牌教练</p>
+        </a>
+        <a class="weui-grid js_grid" data-target="mobileView/news.html">
+            <div class="weui-grid__icon" style="width:48px;height:48px;">
+                <img src="res/img/news.png" alt="">
+            </div>
+            <p class="weui-grid__label">瑜伽头条</p>
+        </a>
+        <a class="weui-grid js_grid" data-target="mobileView/picture.html">
+            <div class="weui-grid__icon" style="width:48px;height:48px;">
+                <img src="res/img/picture.png" alt="">
+            </div>
+            <p class="weui-grid__label">学员风采</p>
+        </a>
+        <a class="weui-grid js_grid" data-target="mobileView/video.html">
+            <div class="weui-grid__icon" style="width:48px;height:48px;">
+                <img src="res/img/video.png" alt="">
+            </div>
+            <p class="weui-grid__label">教学视频</p>
+        </a>
+    </div>
+</div>
+
+
+<!-- Contact us -->
+<div class="weui-panel weui-panel_access">
+    <div class="weui-panel__hd">联系我们</div>
+    <div class="weui-panel__bd">
+        <div class="weui-media-box weui-media-box_text">
+            <p class="weui-media-box__desc">联系人: 李卉&nbsp; &nbsp;&nbsp; &nbsp;电话: 15522127877</p>
+            <p class="div-gap-10px"></p>
+            <p class="weui-media-box__desc">场馆地址: 天津中新生态城季景兰庭2-3-102</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- Foot -->
+<div class="weui-footer" style="height:1.5rem;line-height:1.5rem;background-color:#000000;margin-top:4px;">
+    <p class="weui-footer__text" style="color:#FFFFFF">版权所有 天津浦尔科技发展有限公司</p>
+</div>

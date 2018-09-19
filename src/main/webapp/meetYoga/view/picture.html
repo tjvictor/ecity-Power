@@ -1,0 +1,40 @@
+<script>
+    $(function () {
+        getAllPhotoWallWithPhotos(1, 5);
+        getPhotoWallTotalCount();
+
+        $('.yoga-nav-go-back').on('click', function (){ $('#tabbar .weui-tab__bd-item--content').load('mobileView/home.html'); });
+    });
+
+    function yogaPhotoBrowse(item) {
+        var key = $(item).parent().parent().attr('id');
+        var data = $('#photoWallView').data(key);
+        var index = $(item).data('target');
+
+        var items = [];
+        for (var i = 0; i < data.length; i++) {
+            var image = data[i];
+            items.push({
+                "image": image.image,
+                "caption": image.caption
+            });
+        }
+
+        $.photoBrowser({
+            items,
+            initIndex: index
+        }).open();
+    }
+</script>
+<div class="yoga-nav-go-back">
+    <img src="res/img/arrow_left_24px.png" >
+</div>
+<div class="page__bd">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">学员风采</div>
+    </div>
+</div>
+
+<div id="photoWallView"></div>
+
+<div id="photo_pagination"></div>
