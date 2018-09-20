@@ -7,8 +7,8 @@
     <meta name="viewport"
           content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <link rel="stylesheet" href="../../res/css/swiper.min.css">
-    <script src="../../res/js/jquery-3.3.1.js"></script>
-    <script src="../../res/js/swiper.js"></script>
+    <script src="../../res/js/jquery-3.3.1.min.js"></script>
+    <script src="../../res/js/swiper.min.js"></script>
     <link rel="stylesheet" href="../../res/css/animate.min.css">
     <style>
         @-webkit-keyframes rotation{
@@ -26,7 +26,7 @@
         }
 
         .Move{
-            animation: move 1s linear infinite;
+            animation: move 2s linear infinite;
         }
 
         html, body{
@@ -125,15 +125,15 @@
     </script>
 </head>
 <body>
-<img id="music_play" src="../../../res/img/music_play.png" class="Rotation"
+<img id="music_play" src="../../res/img/music_play.png" class="Rotation"
      style="width:48px;height:48px;position:absolute;right:0px;z-index:1000;display:none;" onclick="stop()">
-<img id="music_pause" src="../../../res/img/music_pause.png"
+<img id="music_pause" src="../../res/img/music_pause.png"
      style="width:48px;height:48px;position:absolute;right:0px;z-index:1000;" onclick="start()">
 <audio id="audio" preload loop>
     <source src="res/music.mp3" type="audio/mpeg">
     Your browser does not support the audio tag.
 </audio>
-<img src="../../../res/img/icon_nav_up.png" class="Move" style="position:absolute;bottom:0px;height:35px;right:50px;z-index:2000;">
+<img src="../../res/img/pull_up.png" class="Move" style="position:absolute;bottom:0px;height:35px;left:0;right:0;margin:0 auto;z-index:2000;">
 <div class="swiper-container" style="height:100%;">
     <div class="swiper-wrapper" style="height:100%;">
         <div class="swiper-slide" style="height:100%;">
@@ -178,8 +178,16 @@
                 <p class="p-padding-top-20px">
                     遇见瑜伽生活馆简介:
                 </p>
-                <p class="p-padding-top-10px">
-                    请李卉同学自己添加吧。
+                <p style="font-size:18px;" class="p-padding-top-10px">
+                    &nbsp; &nbsp;&nbsp; &nbsp;遇见瑜伽创办的初心是集结一群热爱瑜伽、愿意分享生活的同修们，通过创造一个更接近瑜伽内涵的空间环境，配备专业的瑜伽教练，建立内在与外在自然的连接。
+                </p>
+                <p style="font-size:18px;" >
+                    &nbsp; &nbsp;&nbsp; &nbsp;遇见瑜伽位于中新生态城，地理位置优越，交通便利，环境优雅，配套设施完善。
+                </p>
+                <p style="font-size:18px;" >
+                    &nbsp; &nbsp;&nbsp; &nbsp;会馆主要开设中高端私教，针对个人练习需求进行私人订制，同时开设产后修复、维密体雕、塑臀瘦腿精品小班课，还有包括空中瑜伽、波速球燃脂，舞蹈类等特色课以及传统哈他，阴瑜伽，舞韵瑜伽，轮瑜伽，艾扬格，肩颈理疗等普通会员大课！
+                    另外，会馆有专业的孕产瑜伽，从备孕、孕期、产后修复到产后一年的维密体雕塑形课。针对孩子的，还有儿童瑜伽，青少年瑜伽，亲子瑜伽！
+                    会馆定期开设不同主题的沙龙，芳香精油、亲子活动、孕期安全、营养健康等等，还会邀请国内著名瑜伽导师来培训。
                 </p>
             </div>
         </div>
