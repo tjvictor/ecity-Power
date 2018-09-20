@@ -1,5 +1,5 @@
 function getCourses(){
-    callAjax('/websiteService/getCourses', '', 'getCoursesCallback', '', '', '', '');
+    callAjax('/meetYogaService/getCourses', '', 'getCoursesCallback', '', '', '', '');
 }
 function getCoursesCallback(data){
     if (data.status == "ok" && data.callBackData.length > 0) {
@@ -43,7 +43,7 @@ function getCoursesCallback(data){
 function getOneWeekScheduledCourses(){
     var user = checkUser();
     if(user){
-        callAjax('/websiteService/getOneWeekScheduledCourses', '', 'getOneWeekScheduledCoursesCallback', '', '', 'memberId='+user.id, '');
+        callAjax('/meetYogaService/getOneWeekScheduledCourses', '', 'getOneWeekScheduledCoursesCallback', '', '', 'memberId='+user.id, '');
     }
 }
 function getOneWeekScheduledCoursesCallback(data){
@@ -101,7 +101,7 @@ function getOneWeekScheduledCoursesCallback(data){
 
 function orderCourse(scheduleId){
     var param = "scheduleId="+scheduleId+"&memberId=8025e911-91b3-498a-9989-0713b50f96ce";
-    callAjax('/websiteService/insertOrder', '', 'insertOrderCallback', scheduleId, '', param, '');
+    callAjax('/meetYogaService/insertOrder', '', 'insertOrderCallback', scheduleId, '', param, '');
 }
 function insertOrderCallback(scheduleId, data){
     if (data.status == "ok"){
@@ -118,7 +118,7 @@ function insertOrderCallback(scheduleId, data){
 }
 
 function cancelCourse(orderId, scheduleId){
-    callAjax('/websiteService/deleteOrder', '', 'deleteOrderCallback', scheduleId, '', 'orderId='+orderId, '');
+    callAjax('/meetYogaService/deleteOrder', '', 'deleteOrderCallback', scheduleId, '', 'orderId='+orderId, '');
 }
 function deleteOrderCallback(scheduleId, data){
     if (data.status == "ok"){

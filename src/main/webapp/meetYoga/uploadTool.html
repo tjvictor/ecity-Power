@@ -8,7 +8,7 @@
     <script>
         function fileUploading(fileElementId) {
             $.ajaxFileUpload({
-                url: '/websiteService/uploadPhotoWall/' + fileElementId + '/' + $('#photoWallId').val(),
+                url: '/meetYogaService/uploadPhotoWall/' + fileElementId + '/' + $('#photoWallId').val(),
                 secureuri: false,
                 dataType: 'json',
                 fileElementId: fileElementId,

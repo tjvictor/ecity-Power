@@ -1,5 +1,5 @@
 function getVideos(){
-    callAjax('/websiteService/getVideos', '', 'getVideosCallback', '', '', '', '');
+    callAjax('/meetYogaService/getVideos', '', 'getVideosCallback', '', '', '', '');
 }
 function getVideosCallback(data){
     if (data.status == "ok" && data.callBackData.length > 0) {

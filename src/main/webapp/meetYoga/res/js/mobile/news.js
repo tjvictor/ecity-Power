@@ -1,5 +1,5 @@
 function getAllNewsBrief(){
-    callAjax('/websiteService/getAllNewsBrief', '', 'getAllNewsBriefCallback', '', '', '', '');
+    callAjax('/meetYogaService/getAllNewsBrief', '', 'getAllNewsBriefCallback', '', '', '', '');
 }
 function getAllNewsBriefCallback(data){
     if (data.status == "ok" && data.callBackData.length > 0) {

@@ -44,10 +44,10 @@ function memberInit(){
             "remark": remark
         };
 
-        callAjax('/websiteService/addMember', '', 'addMemberCallback', '', 'POST', postValue, '');
+        callAjax('/meetYogaService/addMember', '', 'addMemberCallback', '', 'POST', postValue, '');
     });
 
-    callAjax('/websiteService/getMembers', '', 'getMembersCallback', '', '', '', '');
+    callAjax('/meetYogaService/getMembers', '', 'getMembersCallback', '', '', '', '');
 }
 function getMembersCallback(data) {
     if (data.status == "ok") {
@@ -116,7 +116,7 @@ function deleteMember(obj) {
     var id = $(obj).attr('id');
     $.confirm("您确定要删除吗?", "确认删除?",
     function() {
-        callAjax('/websiteService/deleteMember', '', 'deleteMemberCallback', '', '', 'id=' + id, '');
+        callAjax('/meetYogaService/deleteMember', '', 'deleteMemberCallback', '', '', 'id=' + id, '');
     },
     function() {
         $('.memberView').removeData(id);
@@ -154,10 +154,10 @@ function notificationInit(){
             "content": content,
         };
 
-        callAjax('/websiteService/addNotification', '', 'addNotificationCallback', '', 'POST', postValue, '');
+        callAjax('/meetYogaService/addNotification', '', 'addNotificationCallback', '', 'POST', postValue, '');
     });
 
-    callAjax('/websiteService/getNotifications', '', 'getNotificationsCallback', '', '', '', '');
+    callAjax('/meetYogaService/getNotifications', '', 'getNotificationsCallback', '', '', '', '');
 }
 function getNotificationsCallback(data) {
     if (data.status == "ok") {
@@ -219,7 +219,7 @@ function deleteNotification(obj) {
     var id = $(obj).attr('id');
     $.confirm("您确定要删除吗?", "确认删除?",
     function() {
-        callAjax('/websiteService/deleteNotification', '', 'deleteNotificationCallback', '', '', 'id=' + id, '');
+        callAjax('/meetYogaService/deleteNotification', '', 'deleteNotificationCallback', '', '', 'id=' + id, '');
     },
     function() {
         $('.notificationView').removeData(id);
@@ -242,7 +242,7 @@ function scheduleInit(){
         dateFormat: 'yyyy-mm-dd',
         onChange: function (p, values, displayValues) {
             var param = "date="+values[0];
-            callAjax('/websiteService/getFullScheduleByDate', '', 'getFullScheduleByDateCallback', '', '', param, '');
+            callAjax('/meetYogaService/getFullScheduleByDate', '', 'getFullScheduleByDateCallback', '', '', param, '');
         }
     });
 
@@ -279,11 +279,11 @@ function scheduleInit(){
             "capacity": capacity,
         };
 
-        callAjax('/websiteService/addSchedule', '', 'addScheduleCallback', '', 'POST', postValue, '');
+        callAjax('/meetYogaService/addSchedule', '', 'addScheduleCallback', '', 'POST', postValue, '');
     });
 
-    callAjax('/websiteService/getCourses', '', 'getCoursesCallback', '', '', '', '');
-    callAjax('/websiteService/getTeachers', '', 'getTeachersCallback', '', '', '', '');
+    callAjax('/meetYogaService/getCourses', '', 'getCoursesCallback', '', '', '', '');
+    callAjax('/meetYogaService/getTeachers', '', 'getTeachersCallback', '', '', '', '');
 }
 function getFullScheduleByDateCallback(data) {
     if (data.status == "ok") {
@@ -390,7 +390,7 @@ function deleteSchedule(obj) {
     var id = $(obj).attr('id');
     $.confirm("您确定要删除吗?", "确认删除?",
     function() {
-        callAjax('/websiteService/deleteSchedule', '', 'deleteScheduleCallback', '', '', 'id=' + id, '');
+        callAjax('/meetYogaService/deleteSchedule', '', 'deleteScheduleCallback', '', '', 'id=' + id, '');
     },
     function() {
         $('.scheduleView').removeData(id);

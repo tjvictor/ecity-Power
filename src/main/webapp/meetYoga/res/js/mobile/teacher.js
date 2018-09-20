@@ -1,5 +1,5 @@
 function getTeachers(){
-    callAjax('/websiteService/getTeachers', '', 'getTeachersCallback', '', '', '', '');
+    callAjax('/meetYogaService/getTeachers', '', 'getTeachersCallback', '', '', '', '');
 }
 function getTeachersCallback(data){
     if (data.status == "ok" && data.callBackData.length > 0) {

@@ -45,7 +45,7 @@ $('.yoga-login-button').on('click', function(){
     }
     var param = "tel="+name+"&password="+pwd;
 
-    callAjax('/websiteService/login', '', 'loginCallback', '', '', param, '');
+    callAjax('/meetYogaService/login', '', 'loginCallback', '', '', param, '');
 });
 function loginCallback(data){
     if (data.status == "ok" && data.callBackData){
@@ -55,7 +55,7 @@ function loginCallback(data){
         }
         Cookies.set("meet-yoga-user", data.callBackData, { expires: 1 });
         $.alert("登录成功！！！","提示");
-        $('#tabbar .weui-tab__bd-item--content').load('mobileView/home.html');
+        $('#tabbar .weui-tab__bd-item--content').load('view/home.html');
         close_login();
     }else{
         $.alert("手机号码不存在或是密码不正确！请重新登录", "警告！");

@@ -1,5 +1,5 @@
 function getPhotoWallTotalCount(){
-    callAjax('/websiteService/getPhotoWallTotalCount', '', 'getPhotoWallTotalCountCallback', '', '', '', '', false);
+    callAjax('/meetYogaService/getPhotoWallTotalCount', '', 'getPhotoWallTotalCountCallback', '', '', '', '', false);
 }
 function getPhotoWallTotalCountCallback(data){
     if (data.status == "ok") {
@@ -20,7 +20,7 @@ function getAllPhotoWallWithPhotos(pageNumber, pageSize){
         $('#photoWallView').html('');
     }
     var param = "pageNumber="+pageNumber+"&pageSize="+pageSize;
-    callAjax('/websiteService/getAllPhotoWallWithPhotos', '', 'getAllPhotoWallWithPhotosCallback', '', '', param, '');
+    callAjax('/meetYogaService/getAllPhotoWallWithPhotos', '', 'getAllPhotoWallWithPhotosCallback', '', '', param, '');
 }
 function getAllPhotoWallWithPhotosCallback(data){
     if (data.status == "ok" && data.callBackData.length > 0) {

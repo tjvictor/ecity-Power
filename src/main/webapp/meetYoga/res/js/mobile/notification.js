@@ -1,5 +1,5 @@
 function getTop5Notification(){
-    callAjax('/websiteService/getNotificationBriefByCount', '', 'getTop5NotificationCallback', '', '', 'topCount=5', '');
+    callAjax('/meetYogaService/getNotificationBriefByCount', '', 'getTop5NotificationCallback', '', '', 'topCount=5', '');
 }
 function getTop5NotificationCallback(data){
     if(data.status == "ok" && data.callBackData.length > 0){
