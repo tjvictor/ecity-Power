@@ -72,7 +72,7 @@ function close_login(){
     $('#loginBar').removeClass('weui-tab__bd-item--active');
 }
 
-    function checkUser(){
+function checkUser(){
     var user = Cookies.get('meet-yoga-user');
     if(!user){
         open_login();

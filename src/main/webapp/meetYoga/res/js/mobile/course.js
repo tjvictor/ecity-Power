@@ -100,7 +100,8 @@ function getOneWeekScheduledCoursesCallback(data){
 }
 
 function orderCourse(scheduleId){
-    var param = "scheduleId="+scheduleId+"&memberId=8025e911-91b3-498a-9989-0713b50f96ce";
+    var user = checkUser();
+    var param = "scheduleId="+scheduleId+"&memberId="+user.id;
     callAjax('/meetYogaService/insertOrder', '', 'insertOrderCallback', scheduleId, '', param, '');
 }
 function insertOrderCallback(scheduleId, data){
