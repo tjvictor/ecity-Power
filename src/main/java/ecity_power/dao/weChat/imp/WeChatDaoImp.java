@@ -7,6 +7,7 @@ import ecity_power.model.weChat.Activity_Register;
 import ecity_power.model.weChat.OauthToken;
 import ecity_power.model.weChat.SNSUserInfo;
 
+import ecity_power.utility.DateUtils;
 import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -278,7 +279,7 @@ public class WeChatDaoImp extends WeChatBaseDao implements WeChatDao {
     @Override
     public void replaceOauthToken(OauthToken item) throws SQLException {
         try (Connection connection = DriverManager.getConnection(dbActivityConnectString)){
-            String replaceStr = "replace into OauthToken values(?,?,?,?,?);";
+            String replaceStr = "replace into OauthToken values(?,?,?,?,?,?);";
             try(PreparedStatement ps = connection.prepareStatement(replaceStr)) {
                 int i = 1;
                 ps.setString(i++, item.getOpenId());
@@ -286,6 +287,7 @@ public class WeChatDaoImp extends WeChatBaseDao implements WeChatDao {
                 ps.setString(i++, item.getExpiresIn());
                 ps.setString(i++, item.getRefreshToken());
                 ps.setString(i++, item.getScope());
+                ps.setString(i++, DateUtils.getCurrentDateTime());
                 ps.executeUpdate();
             }
         }
@@ -294,7 +296,7 @@ public class WeChatDaoImp extends WeChatBaseDao implements WeChatDao {
     @Override
     public void replaceSNSUserInfo(SNSUserInfo item) throws SQLException {
         try (Connection connection = DriverManager.getConnection(dbActivityConnectString)){
-            String replaceStr = "replace into SNSUserInfo values(?,?,?,?,?,?,?,?);";
+            String replaceStr = "replace into SNSUserInfo values(?,?,?,?,?,?,?,?,?);";
             try(PreparedStatement ps = connection.prepareStatement(replaceStr)) {
                 int i = 1;
                 ps.setString(i++, item.getOpenId());
@@ -305,6 +307,7 @@ public class WeChatDaoImp extends WeChatBaseDao implements WeChatDao {
                 ps.setString(i++, item.getCity());
                 ps.setString(i++, item.getHeadImgUrl());
                 ps.setString(i++, item.getPrivilegeString());
+                ps.setString(i++, DateUtils.getCurrentDateTime());
                 ps.executeUpdate();
             }
         }

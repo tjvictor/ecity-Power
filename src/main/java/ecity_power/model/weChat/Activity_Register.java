@@ -53,7 +53,7 @@ public class Activity_Register {
     }
 
     public void setDate(String date) {
-        date = date;
+        this.date = date;
     }
 
     public List<Activity_Participate> getActivity_participateList() {

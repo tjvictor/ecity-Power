@@ -201,7 +201,6 @@ public class wxServices {
                                             @RequestParam(value = "activityId") String activityId) throws IOException {
         String url = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s/wxServices/generateRegisterPage&response_type=code&scope=snsapi_base&state=%s,register#wechat_redirect",
                 WeChatContant.APP_ID, WeChatContant.REQ_DOMAIN, activityId);
-
         response.sendRedirect(url);
         return;
     }
@@ -210,7 +209,6 @@ public class wxServices {
                                             @RequestParam(value = "activityRegisterId") String activityRegisterId) throws IOException {
         String url = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s/wxServices/generateParticipatePage&response_type=code&scope=snsapi_base&state=%s,participate#wechat_redirect",
                 WeChatContant.APP_ID, WeChatContant.REQ_DOMAIN, activityRegisterId);
-
         response.sendRedirect(url);
         return;
     }
@@ -218,7 +216,7 @@ public class wxServices {
 
     /*
     invoke below link in wechat client explorer, then wechat server will callback generatePersonalityPage function;
-    https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx573faabcfb33a8a0&redirect_uri=http://ea8156c2.ngrok.io/wxServices/generatePersonalityPage&response_type=code&scope=snsapi_base&state=activityId,register#wechat_redirect
+    https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd4819a33444176f6&redirect_uri=http://ea8156c2.ngrok.io/wxServices/generatePersonalityPage&response_type=code&scope=snsapi_base&state=activityId,register#wechat_redirect
     */
     @RequestMapping("/generateRegisterPage")
     public void generateRegisterPage(HttpServletResponse response,
@@ -230,7 +228,7 @@ public class wxServices {
         Activity activity = weChatDaoImp.getActivityById(activityId);
         WxResponse wxResponse = getWxOpenIdBySNSApi_Base(response, snsapi_base_code);
         if(wxResponse.getOauthToken() == null){
-            response.sendRedirect("/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
+            response.sendRedirect("/meetYoga/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
             return;
         }
 
@@ -260,7 +258,7 @@ public class wxServices {
                 //refresh successfully, re get user info
                 wxResponse = getSNSUserInfoByAccessToken(token.getAccessToken(), token.getOpenId());
                 if(wxResponse.getSnsUserInfo() == null){
-                    response.sendRedirect("/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
+                    response.sendRedirect("/meetYoga/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
                     return;
                 }
             }
@@ -287,7 +285,7 @@ public class wxServices {
         Activity activity = weChatDaoImp.getActivityById(activityRegister.getActivityId());
         WxResponse wxResponse = getWxOpenIdBySNSApi_Base(response, snsapi_base_code);
         if(wxResponse.getOauthToken() == null){
-            response.sendRedirect("/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
+            response.sendRedirect("/meetYoga/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
             return;
         }
 
@@ -296,6 +294,7 @@ public class wxServices {
             String participateUrl = String.format("%s?activityId=%s&nickName=%s&duplicate=1",
                     activity.getParticipatePage(), activity.getId(), WeChatUtil.urlEncodeUTF8(activity_Participate.getParticipateName()));
             response.sendRedirect(participateUrl);
+            return;
         }
 
 
@@ -316,7 +315,7 @@ public class wxServices {
                 //refresh successfully, re get user info
                 wxResponse = getSNSUserInfoByAccessToken(token.getAccessToken(), token.getOpenId());
                 if(wxResponse.getSnsUserInfo() == null){
-                    response.sendRedirect("/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
+                    response.sendRedirect("/meetYoga/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
                     return;
                 }
             }
@@ -351,7 +350,6 @@ public class wxServices {
     private void requestSNSApi_UserInfo_Code(HttpServletResponse response, String state) throws IOException {
         String url = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s/wxServices/getSNSUserInfoBySNSApi_UserInfo&response_type=code&scope=snsapi_userinfo&state=%s#wechat_redirect",
                 WeChatContant.APP_ID, WeChatContant.REQ_DOMAIN ,state);
-
         response.sendRedirect(url);
     }
 
@@ -371,8 +369,8 @@ public class wxServices {
         return wxResponse;
     }
     /*
-    https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx573faabcfb33a8a0&redirect_uri=http://ea8156c2.ngrok.io/wxServices/generatePersonalityPage&response_type=code&scope=snsapi_userinfo&state=activityId,register#wechat_redirect
-    https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx573faabcfb33a8a0&secret=83f320c9694458ddf718451ae12f6b80&code=081Hezb50YWj0K1e12e50b5xb50Hezbt&grant_type=authorization_code
+    https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd4819a33444176f6&redirect_uri=http://ea8156c2.ngrok.io/wxServices/generatePersonalityPage&response_type=code&scope=snsapi_userinfo&state=activityId,register#wechat_redirect
+    https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxd4819a33444176f6&secret=83f320c9694458ddf718451ae12f6b80&code=081Hezb50YWj0K1e12e50b5xb50Hezbt&grant_type=authorization_code
     https://api.weixin.qq.com/sns/userinfo?access_token=13_e4yg1899-hgY8M4AXKOPSF399jEaE6uKkM1dWfpWhF5kmubmibOAO6fkTYeFCHV2SPGSivPb2kxVmWHFeV_GuA&openid=oguMF1vk1hV17FHMYS4pTtOr6uQU&lang=zh_CN
 
     获取第二步的refresh_token后，请求以下链接获取access_token：
@@ -392,7 +390,7 @@ public class wxServices {
             activityRegister = weChatDaoImp.getActivityRegisterById(id);
             activity = weChatDaoImp.getActivityById(activityRegister.getActivityId());
         }else{
-            response.sendRedirect("/activity/error.html?errcode=-1&errmsg=unknown request mode");
+            response.sendRedirect("/meetYoga/activity/error.html?errcode=-1&errmsg=unknown request mode");
             return ;
         }
 
@@ -427,11 +425,11 @@ public class wxServices {
                         return;
                     }
                 }else{
-                    response.sendRedirect("/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
+                    response.sendRedirect("/meetYoga/activity/error.html?errcode="+wxResponse.getWxError().getErrorCode()+"&errmsg="+wxResponse.getWxError().getErrorMessage());
                 }
             }catch (Exception e){
                 WxError wxError = fillWxErrorEntity(jsonObject);
-                response.sendRedirect("/activity/error.html?errcode="+wxError.getErrorCode()+"&errmsg="+wxError.getErrorMessage());
+                response.sendRedirect("/meetYoga/activity/error.html?errcode="+wxError.getErrorCode()+"&errmsg="+wxError.getErrorMessage());
             }
         }
     }
@@ -502,6 +500,7 @@ public class wxServices {
         item.setActivityRegisterId(activityRegisterId);
         item.setParticipateId(participateId);
         item.setParticipateName(participateName);
+        item.setWeight("1");
         item.setDate(date);
         return item;
     }

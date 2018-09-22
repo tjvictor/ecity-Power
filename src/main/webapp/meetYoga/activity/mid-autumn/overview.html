@@ -12,7 +12,7 @@
     <script>
         $(function() {
             var param = "id=1fdec647-fa3e-4541-86b4-da9bb9a911f9";
-            callAjax('/wxServices/getActivityDetailsById', '', 'getActivityDetailsByIdCallBack', '', '', param, '');
+            callAjax('/root/wxServices/getActivityDetailsById', '', 'getActivityDetailsByIdCallBack', '', '', param, '');
         });
         function getActivityDetailsByIdCallBack(data){
             if(data.status == "ok"){

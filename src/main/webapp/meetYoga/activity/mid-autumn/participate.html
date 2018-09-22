@@ -15,16 +15,16 @@
 
             document.getElementsByTagName('span')[0].innerText=niceName;
             document.getElementsByTagName('span')[1].innerText=niceName;
-            if(duplicate === 1){
+            if(duplicate === "1"){
                 document.getElementById('first').style.display='none';
                 document.getElementById('multiple').style.display='block';
             }
-            if(duplicate === 0){
+            if(duplicate === "0"){
                 document.getElementById('first').style.display='block';
                 document.getElementById('multiple').style.display='none';
             }
 
-            document.getElementById('publish').setAttribute('href','https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx573faabcfb33a8a0&redirect_uri=http://b4e1f5a5.ngrok.io/wxServices/generateRegisterPage&response_type=code&scope=snsapi_base&state='+activityId+',register#wechat_redirect');
+            document.getElementById('publish').setAttribute('href','https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd4819a33444176f6&redirect_uri=http://wx.ecity-power.com/wxServices/generateRegisterPage&response_type=code&scope=snsapi_base&state='+activityId+',register#wechat_redirect');
         };
     </script>
 </head>
@@ -35,7 +35,7 @@
         <br>
         <p class="p-padding-top-10px">如果您已动心了，那还等什么，赶快加入我们吧。点击进入<a id="publish" style="font-size:20px;color:green">砍价页面</a>，让你的好友帮你一起砍价吧。</p>
         <br>
-        <p class="p-padding-top-10px">遇见瑜伽也同样期待您的加入。点击<a href="/meetYoga.html" style="font-size:20px;color:blue">遇见瑜伽生活馆</a>，快来了解我们吧。</p>
+        <p class="p-padding-top-10px">遇见瑜伽也同样期待您的加入。点击<a href="/meetYoga/index.html" style="font-size:20px;color:blue">遇见瑜伽生活馆</a>，快来了解我们吧。</p>
 
         <p style="font-size:18px;" class="p-padding-top-10px">
             &nbsp; &nbsp;&nbsp; &nbsp;遇见瑜伽创办的初心是集结一群热爱瑜伽、愿意分享生活的同修们，通过创造一个更接近瑜伽内涵的空间环境，配备专业的瑜伽教练，建立内在与外在自然的连接。

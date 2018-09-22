@@ -3,14 +3,14 @@ package ecity_power.model.weChat;
 public class WeChatContant {
 
     //APPID
-    public static final String APP_ID = "wx573faabcfb33a8a0";
+    public static final String APP_ID = "wxd4819a33444176f6";
     //appsecret
-    public static final String APP_SECRET = "83f320c9694458ddf718451ae12f6b80";
+    public static final String APP_SECRET = "673af3b6b89a70e7c995295fedbdbf41";
     // Token
-    public static final String TOKEN = "tjpower";
+    public static final String TOKEN = "ecitypower";
 
 
-    public static final String REQ_DOMAIN = "http://b4e1f5a5.ngrok.io";
+    public static final String REQ_DOMAIN = "http://wx.ecity-power.com";
     public static final String REQ_BIZ_REGISTER = "register";
     public static final String REQ_BIZ_PARTICIPATE = "participate";
 
