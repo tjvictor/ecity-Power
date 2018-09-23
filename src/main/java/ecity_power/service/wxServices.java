@@ -28,10 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -64,7 +61,7 @@ public class wxServices {
     @RequestMapping(value = "/wx", method = RequestMethod.POST)
     public String processMsg(HttpServletRequest request) {
         // xml格式的消息数据
-        String respXml = null;
+        String respXml = "";
         // 默认返回的文本消息内容
         String respContent;
         try {
@@ -74,114 +71,114 @@ public class wxServices {
             String msgType = (String) requestMap.get(WeChatContant.MsgType);
             String mes = null;
             // 文本消息
-            if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_TEXT)) {
-                mes = requestMap.get(WeChatContant.Content).toString();
-                if (mes != null && mes.length() < 2) {
-                    List<ArticleItem> items = new ArrayList<>();
-                    ArticleItem item = new ArticleItem();
-                    item.setTitle("照片墙");
-                    item.setDescription("阿狸照片墙");
-                    item.setPicUrl("http://changhaiwx.pagekite.me/photo-wall/a/iali11.jpg");
-                    item.setUrl("http://changhaiwx.pagekite.me/page/photowall");
-                    items.add(item);
-
-                    item = new ArticleItem();
-                    item.setTitle("哈哈");
-                    item.setDescription("一张照片");
-                    item.setPicUrl("http://changhaiwx.pagekite.me/images/me.jpg");
-                    item.setUrl("http://changhaiwx.pagekite.me/page/index");
-                    items.add(item);
-
-                    item = new ArticleItem();
-                    item.setTitle("小游戏2048");
-                    item.setDescription("小游戏2048");
-                    item.setPicUrl("http://changhaiwx.pagekite.me/images/2048.jpg");
-                    item.setUrl("http://changhaiwx.pagekite.me/page/game2048");
-                    items.add(item);
-
-                    item = new ArticleItem();
-                    item.setTitle("百度");
-                    item.setDescription("百度一下");
-                    item.setPicUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505100912368&di=69c2ba796aa2afd9a4608e213bf695fb&imgtype=0&src=http%3A%2F%2Ftx.haiqq.com%2Fuploads%2Fallimg%2F170510%2F0634355517-9.jpg");
-                    item.setUrl("http://www.baidu.com");
-                    items.add(item);
-
-                    respXml = WeChatUtil.sendArticleMsg(requestMap, items);
-                } else if ("我的信息".equals(mes)) {
-                    /*Map<String, String> userInfo = getUserInfo(requestMap.get(WeChatContant.FromUserName));
-                    System.out.println(userInfo.toString());
-                    String nickname = userInfo.get("nickname");
-                    String city = userInfo.get("city");
-                    String province = userInfo.get("province");
-                    String country = userInfo.get("country");
-                    String headimgurl = userInfo.get("headimgurl");
-                    List<ArticleItem> items = new ArrayList<>();
-                    ArticleItem item = new ArticleItem();
-                    item.setTitle("你的信息");
-                    item.setDescription("昵称:"+nickname+"  地址:"+country+" "+province+" "+city);
-                    item.setPicUrl(headimgurl);
-                    item.setUrl("http://www.baidu.com");
-                    items.add(item);
-
-                    respXml = WeChatUtil.sendArticleMsg(requestMap, items);*/
-                }
-            }
-            // 图片消息
-            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_IMAGE)) {
-                respContent = "您发送的是图片消息！";
-                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
-            }
-            // 语音消息
-            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_VOICE)) {
-                respContent = "您发送的是语音消息！";
-                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
-            }
-            // 视频消息
-            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_VIDEO)) {
-                respContent = "您发送的是视频消息！";
-                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
-            }
-            // 地理位置消息
-            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_LOCATION)) {
-                respContent = "您发送的是地理位置消息！";
-                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
-            }
-            // 链接消息
-            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_LINK)) {
-                respContent = "您发送的是链接消息！";
-                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
-            }
-            // 事件推送
-            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_EVENT)) {
-                // 事件类型
-                String eventType = (String) requestMap.get(WeChatContant.Event);
-                // 关注
-                if (eventType.equals(WeChatContant.EVENT_TYPE_SUBSCRIBE)) {
-                    respContent = "谢谢您的关注！";
-                    respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
-                }
-                // 取消关注
-                else if (eventType.equals(WeChatContant.EVENT_TYPE_UNSUBSCRIBE)) {
-                    // TODO 取消订阅后用户不会再收到公众账号发送的消息，因此不需要回复
-                }
-                // 扫描带参数二维码
-                else if (eventType.equals(WeChatContant.EVENT_TYPE_SCAN)) {
-                    // TODO 处理扫描带参数二维码事件
-                }
-                // 上报地理位置
-                else if (eventType.equals(WeChatContant.EVENT_TYPE_LOCATION)) {
-                    // TODO 处理上报地理位置事件
-                }
-                // 自定义菜单
-                else if (eventType.equals(WeChatContant.EVENT_TYPE_CLICK)) {
-                    // TODO 处理菜单点击事件
-                }
-            }
-            mes = mes == null ? "不知道你在干嘛" : mes;
-            if (respXml == null)
-                respXml = WeChatUtil.sendTextMsg(requestMap, mes);
-            System.out.println(respXml);
-            return respXml;
+//            if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_TEXT)) {
+//                mes = requestMap.get(WeChatContant.Content).toString();
+//                if (mes != null && mes.length() < 2) {
+//                    List<ArticleItem> items = new ArrayList<>();
+//                    ArticleItem item = new ArticleItem();
+//                    item.setTitle("照片墙");
+//                    item.setDescription("阿狸照片墙");
+//                    item.setPicUrl("http://changhaiwx.pagekite.me/photo-wall/a/iali11.jpg");
+//                    item.setUrl("http://changhaiwx.pagekite.me/page/photowall");
+//                    items.add(item);
+//
+//                    item = new ArticleItem();
+//                    item.setTitle("哈哈");
+//                    item.setDescription("一张照片");
+//                    item.setPicUrl("http://changhaiwx.pagekite.me/images/me.jpg");
+//                    item.setUrl("http://changhaiwx.pagekite.me/page/index");
+//                    items.add(item);
+//
+//                    item = new ArticleItem();
+//                    item.setTitle("小游戏2048");
+//                    item.setDescription("小游戏2048");
+//                    item.setPicUrl("http://changhaiwx.pagekite.me/images/2048.jpg");
+//                    item.setUrl("http://changhaiwx.pagekite.me/page/game2048");
+//                    items.add(item);
+//
+//                    item = new ArticleItem();
+//                    item.setTitle("百度");
+//                    item.setDescription("百度一下");
+//                    item.setPicUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505100912368&di=69c2ba796aa2afd9a4608e213bf695fb&imgtype=0&src=http%3A%2F%2Ftx.haiqq.com%2Fuploads%2Fallimg%2F170510%2F0634355517-9.jpg");
+//                    item.setUrl("http://www.baidu.com");
+//                    items.add(item);
+//
+//                    respXml = WeChatUtil.sendArticleMsg(requestMap, items);
+//                } else if ("我的信息".equals(mes)) {
+//                    /*Map<String, String> userInfo = getUserInfo(requestMap.get(WeChatContant.FromUserName));
+//                    System.out.println(userInfo.toString());
+//                    String nickname = userInfo.get("nickname");
+//                    String city = userInfo.get("city");
+//                    String province = userInfo.get("province");
+//                    String country = userInfo.get("country");
+//                    String headimgurl = userInfo.get("headimgurl");
+//                    List<ArticleItem> items = new ArrayList<>();
+//                    ArticleItem item = new ArticleItem();
+//                    item.setTitle("你的信息");
+//                    item.setDescription("昵称:"+nickname+"  地址:"+country+" "+province+" "+city);
+//                    item.setPicUrl(headimgurl);
+//                    item.setUrl("http://www.baidu.com");
+//                    items.add(item);
+//
+//                    respXml = WeChatUtil.sendArticleMsg(requestMap, items);*/
+//                }
+//            }
+//            // 图片消息
+//            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_IMAGE)) {
+//                respContent = "您发送的是图片消息！";
+//                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
+//            }
+//            // 语音消息
+//            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_VOICE)) {
+//                respContent = "您发送的是语音消息！";
+//                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
+//            }
+//            // 视频消息
+//            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_VIDEO)) {
+//                respContent = "您发送的是视频消息！";
+//                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
+//            }
+//            // 地理位置消息
+//            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_LOCATION)) {
+//                respContent = "您发送的是地理位置消息！";
+//                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
+//            }
+//            // 链接消息
+//            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_LINK)) {
+//                respContent = "您发送的是链接消息！";
+//                respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
+//            }
+//            // 事件推送
+//            else if (msgType.equals(WeChatContant.REQ_MESSAGE_TYPE_EVENT)) {
+//                // 事件类型
+//                String eventType = (String) requestMap.get(WeChatContant.Event);
+//                // 关注
+//                if (eventType.equals(WeChatContant.EVENT_TYPE_SUBSCRIBE)) {
+//                    respContent = "谢谢您的关注！";
+//                    respXml = WeChatUtil.sendTextMsg(requestMap, respContent);
+//                }
+//                // 取消关注
+//                else if (eventType.equals(WeChatContant.EVENT_TYPE_UNSUBSCRIBE)) {
+//                    // TODO 取消订阅后用户不会再收到公众账号发送的消息，因此不需要回复
+//                }
+//                // 扫描带参数二维码
+//                else if (eventType.equals(WeChatContant.EVENT_TYPE_SCAN)) {
+//                    // TODO 处理扫描带参数二维码事件
+//                }
+//                // 上报地理位置
+//                else if (eventType.equals(WeChatContant.EVENT_TYPE_LOCATION)) {
+//                    // TODO 处理上报地理位置事件
+//                }
+//                // 自定义菜单
+//                else if (eventType.equals(WeChatContant.EVENT_TYPE_CLICK)) {
+//                    // TODO 处理菜单点击事件
+//                }
+//            }
+//            mes = mes == null ? "不知道你在干嘛" : mes;
+//            if (respXml == null)
+//                respXml = WeChatUtil.sendTextMsg(requestMap, mes);
+//            System.out.println(respXml);
+            return WeChatUtil.sendTextMsg(requestMap, "感谢您的关注。");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -409,9 +406,9 @@ public class wxServices {
                                 activity.getId(), wxResponse.getSnsUserInfo().getOpenId(),
                                 wxResponse.getSnsUserInfo().getNickName(), DateUtils.getCurrentDateTime());
                         weChatDaoImp.insertActivityRegister(item);
-                        String participateUrl = String.format("%s?activityRegisterId=%s&nickName=%s",
+                        String registerUrl = String.format("%s?activityRegisterId=%s&nickName=%s",
                                 activity.getRegisterPage(), item.getId(), WeChatUtil.urlEncodeUTF8(item.getRegisterName()));
-                        response.sendRedirect(participateUrl);
+                        response.sendRedirect(registerUrl);
                         return;
                     }
                     else if(requestMode.equals(WeChatContant.REQ_BIZ_PARTICIPATE)){
@@ -496,11 +493,12 @@ public class wxServices {
                                                            String participateId,
                                                            String participateName, String date){
         Activity_Participate item = new Activity_Participate();
+        Random ra = new Random();
         item.setId(id);
         item.setActivityRegisterId(activityRegisterId);
         item.setParticipateId(participateId);
         item.setParticipateName(participateName);
-        item.setWeight("1");
+        item.setWeight(String.valueOf(ra.nextInt(30) + 20));
         item.setDate(date);
         return item;
     }
@@ -530,6 +528,18 @@ public class wxServices {
             activity.setActivity_RegisterList(items);
 
             return new ResponseObject("ok", "查询成功", activity);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return new ResponseObject("error", "系统错误，请联系系统管理员");
+        }
+    }
+
+    @RequestMapping(value = "/getParticipatesByActivityRegisterId", method = RequestMethod.GET)
+    public ResponseObject getParticipatesByActivityRegisterId(@RequestParam(value = "activityRegisterId") String activityRegisterId){
+        try {
+            List<Activity_Participate> items = weChatDaoImp.getActivityParticipatesByActivityRegisterId(activityRegisterId);
+
+            return new ResponseObject("ok", "查询成功", items);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return new ResponseObject("error", "系统错误，请联系系统管理员");

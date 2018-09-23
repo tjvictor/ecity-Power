@@ -6,20 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
           content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <link rel="stylesheet" href="../../../res/css/mobile.css">
+    <script src="../../res/js/jquery-3.3.1.min.js"></script>
 </head>
 <body style="background-image:url('res/bg.png')">
 <div style="padding:20px;">
     <p class="" style="font-size: 24px;text-align:center;">《遇见瑜伽》</p>
     <p class="" style="font-size: 24px;text-align:center;">中秋砍价活动大酬宾</p>
     <p class="p-padding-top-10px"></p>
-    <p class="p-padding-top-10px">亲爱的伙伴们，我是<span id="nickName"></span>, 我正在参加遇见瑜伽的砍价活动，受累动动您的小手，帮我点击下面的“赞”，就可以成功帮我砍价50元。
-    </p>
-    <p class="p-padding-top-10px"></p>
+    <div id="doing" style="display:block;">
+        <p class="p-padding-top-10px">&nbsp; &nbsp;&nbsp; &nbsp;亲爱的伙伴们，我是<span id="nickName"></span>, 我正在参加遇见瑜伽的砍价活动，受累动动您的小手，帮我点击下面的“赞”，就可以成功帮我最多砍价50元。
+        </p>
+        <p class="p-padding-top-10px"></p>
+        <br>
+        <a id="zan" href="" style="width:100%;color: white;font-size:24px">
+            <div style="width:100%;height:40px;line-height:40px;background-color: green;text-align: center;">赞</div>
+        </a>
+    </div>
+    <div id="completed" style="display:none;">
+        <p p-padding-top-10px>&nbsp; &nbsp;&nbsp; &nbsp;亲爱的伙伴们, 我已经成功砍到999元，活动已经结束。如果你也对这个活动感兴趣，快快点击<a id="publish" href="publish.html" style="font-size:20px;color:green">砍价页面</a>，让你的好友帮你一起砍价吧。</p>
+    </div>
     <br>
-    <a id="zan" href="" style="width:100%;color: white;font-size:24px">
-        <div style="width:100%;height:40px;line-height:40px;background-color: green;text-align: center;">赞</div>
-    </a>
+    <p class="p-padding-top-10px">已经有&nbsp;<span id="participateCount">0</span>&nbsp;位好友帮助&nbsp;<span id="nickName1"></span>&nbsp;砍价了</p>
+    <div id="participateDiv">
+
+    </div>
     <br>
     <p class="p-padding-top-10px">
         <a href="/meetYoga/index.html">点此进入<font style="color:green;">遇见瑜伽生活馆</font>官方网站，在这里你会发现更多惊喜！</a>
@@ -42,13 +52,40 @@
 </div>
 
 <script>
-        window.onload=function(){
+        $(function(){
             var activityRegisterId = (window.location.search.substring(1).split('&')[0]).split('=')[1];
             var nickName = decodeURI((window.location.search.substring(1).split('&')[1]).split('=')[1]);
+            var nickName1 = nickName;
+            $('#nickName').text(nickName1);
+            $('#nickName1').text(nickName1);
+            $('#zan').attr('href','https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd4819a33444176f6&redirect_uri=http://wx.ecity-power.com/wxServices/generateParticipatePage&response_type=code&scope=snsapi_base&state='+activityRegisterId+',participate#wechat_redirect');
 
-            document.getElementById('nickName').innerText=nickName;
-            document.getElementById('zan').setAttribute('href','https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd4819a33444176f6&redirect_uri=http://wx.ecity-power.com/wxServices/generateParticipatePage&response_type=code&scope=snsapi_base&state='+activityRegisterId+',participate#wechat_redirect');
-        };
+            $.ajax({
+                type: 'GET',
+                url: '/wxServices/getParticipatesByActivityRegisterId',
+                crossDomain: true,
+                data: 'activityRegisterId='+activityRegisterId,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                success: function(data, textStatus, jqXHR) {
+                    var participates = data.callBackData;
+                    var finalPrice = 2380;
+                    if(participates){
+                        $('#participateCount').text(participates.length);
+                        var template = '';
+                        for(var i = 0 ; i < participates.length ; i++){
+                            var participate = participates[i];
+                            finalPrice -= parseInt(participate.weight);
+                            template += '<p style="margin-top:5px;"><span style="color:green">'+participate.participateName+'</span>&nbsp;&nbsp;成功砍价&nbsp;&nbsp;<span style="color:red">'+participate.weight+'</span>&nbsp;&nbsp;元</p>';
+                        }
+                        $('#participateDiv').html(template);
+                    }
+                    if(finalPrice <= 999){
+                        $('#doing').css('display', 'none');
+                        $('#completed').css('display', 'block');
+                    }
+                }
+            });
+        });
 
 </script>
 </body>

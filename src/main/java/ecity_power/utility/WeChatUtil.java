@@ -198,7 +198,7 @@ public class WeChatUtil {
         map.put("FromUserName",  requestMap.get(WeChatContant.ToUserName));
         map.put("MsgType", WeChatContant.RESP_MESSAGE_TYPE_TEXT);
         map.put("CreateTime", new Date().getTime());
-        map.put("Content", content);
+        map.put("Content", urlISO88591(content));
         return  mapToXML(map);
     }
     /**
@@ -301,5 +301,15 @@ public class WeChatUtil {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static String urlISO88591(String message) {
+        try {
+            return new String(message.getBytes(),"ISO-8859-1");
+            //return java.net.URLEncoder.encode(message, "ISO-8859-1");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return message;
     }
 }
