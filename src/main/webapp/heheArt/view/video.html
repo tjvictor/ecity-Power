@@ -1,0 +1,30 @@
+<script>
+    $(function() {
+        getVideos();
+
+        $(document).off('click', '.hehe-open-video').on('click', '.hehe-open-video', function() {
+            var myPlayer = videojs('my-video');
+            var videoType = $(this).data('video-type');
+            myPlayer.src($(this).data('video-path'));
+            myPlayer.ready(function() {
+                myPlayer.play();
+            });
+        });
+
+        $('.hehe-nav-go-back').on('click', function (){ $('#tabbar .weui-tab__bd-item--content').load('view/home.html'); });
+    });
+
+
+</script>
+
+<div class="hehe-nav-go-back">
+    <img src="res/img/arrow_left_24px.png" >
+</div>
+<video id="my-video" style="width:100%" class="video-js vjs-default-skin" controls preload="auto" data-setup="{}"></video>
+<div class="page__bd">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">教学视频</div>
+        <div class="weui-panel__bd">
+        </div>
+    </div>
+</div>

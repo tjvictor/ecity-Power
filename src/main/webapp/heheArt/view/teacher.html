@@ -1,0 +1,24 @@
+<script>
+    $(function() {
+        getTeachers();
+
+        $(document).off('click', '.hehe-open-popup').on('click', '.hehe-open-popup', function() {
+            $('#full-popup-container .hehe-popup-container-text').html($('.weui-panel__bd').data($(this).data('id')));
+            $('#full-popup-container').popup();
+        });
+
+        $('.hehe-nav-go-back').on('click', function (){ $('#tabbar .weui-tab__bd-item--content').load('view/home.html'); });
+    });
+</script>
+
+<div class="hehe-nav-go-back">
+    <img src="res/img/arrow_left_24px.png" >
+</div>
+
+<div class="page__bd">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">教师介绍</div>
+        <div class="weui-panel__bd">
+        </div>
+    </div>
+</div>
