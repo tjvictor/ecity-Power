@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>禾禾美学馆</title>
+    <link rel="stylesheet" type="text/css" href="res/css/webPublic.css">
+    <script type="text/javascript" src="res/js/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="res/js/webOperation.js"></script>
+    <script type="text/javascript" src="res/js/webCommon.js"></script>
+    <script>
+        var bannerLeftPosition=0;
+        function change(){
+            switch(bannerLeftPosition){
+                case 0: $("#picMovDiv").animate({left:"-100%"}, 1000); $("#wordMovDiv").animate({left:"-100%"}, 1000); bannerLeftPosition=100; break;
+                case 100: $("#picMovDiv").animate({left:"-200%"}, 1000); $("#wordMovDiv").animate({left:"-200%"}, 1000); bannerLeftPosition=200; break;
+                case 200: $("#picMovDiv").animate({left:"-300%"}, 1000); $("#wordMovDiv").animate({left:"-300%"}, 1000); bannerLeftPosition=300; break;
+                case 300: $("#picMovDiv").animate({left:"-400%"}, 1000); $("#wordMovDiv").animate({left:"-400%"}, 1000); bannerLeftPosition=400; break;
+                default: $("#picMovDiv").animate({left:"0"}, 1000); $("#wordMovDiv").animate({left:"0"}, 1000); bannerLeftPosition=0; break;
+            }
+        }
+
+        $(function () {
+            setInterval("change()", 5000);
+
+
+            if(window.location.search){
+                var page = window.location.search.substring(1).split('&')[0];
+                var id = window.location.search.substring(1).split('&')[1];
+                if(page === 'page=notification'){
+                    loadNotificationById(id);
+                }
+            }else{
+                $('.content').load('view/main.html');
+            }
+        });
+    </script>
+</head>
+<body>
+<div class="top">
+    <div class="nav">
+        <div class="navPic"><a href="index.html"><img src="res/img/hehe_logo.png" style="height:50px;"> <img src="res/img/title_logo.png" style="margin-left: 200px;height:50px;"></a></div>
+        <div class="navMenu" onclick="navSelect(this, 'view/teacherShow.html')">教师风采</div>
+        <div class="navMenu" onclick="navSelect(this, 'view/artShow.html')">作品展示</div>
+        <div class="navMenu" onclick="navSelect(this, 'view/courseShow.html')">课程介绍</div>
+        <div class="navMenu" onclick="navSelect(this, 'view/about.html')">联系方式</div>
+        <div class="navMenu" onclick="navSelect(this, 'view/member.html')">会员中心</div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="placeholder"></div>
+<div class="banner">
+    <div style="width:1200px;height:200px;overflow:hidden;position:relative; ">
+        <div id="picMovDiv" style="width:1000%;height:100%;position:relative;background-color:#000000">
+            <a id="bannerPic1" target="_blank"
+               style="cursor:pointer;background-image: url('/img/p1.jpg');width:10%;height:100%;float:left;background-size:auto;background-position:center center;background-repeat:no-repeat;"></a>
+            <a id="bannerPic2" target="_blank"
+               style="cursor:pointer;background-image: url('/img/p2.jpg');width:10%;height:100%;float:left;background-size:auto;background-position:center center;background-repeat:no-repeat;"></a>
+            <a id="bannerPic3" target="_blank"
+               style="cursor:pointer;background-image: url('/img/p3.jpg');width:10%;height:100%;float:left;background-size:auto;background-position:center center;background-repeat:no-repeat;"></a>
+            <a id="bannerPic4" target="_blank"
+               style="cursor:pointer;background-image: url('/img/p4.jpg');width:10%;height:100%;float:left;background-size:auto;background-position:center center;background-repeat:no-repeat;"></a>
+            <a id="bannerPic5" target="_blank"
+               style="cursor:pointer;background-image: url('/img/p5.jpg');width:10%;height:100%;float:left;background-size:auto;background-position:center center;background-repeat:no-repeat;"></a>
+        </div>
+    </div>
+    <div style="width:1200px;height:100%;overflow:hidden;position:relative;background-color:black ">
+        <div id="wordMovDiv" style="width:1000%;height:100%;position:relative;">
+            <a id="bannerWord1" target="_blank" style="cursor:pointer;width:10%;height:100%;float:left;color:#FFFFFF">禾禾美学展览馆开幕</a>
+            <a id="bannerWord2" target="_blank" style="cursor:pointer;width:10%;height:100%;float:left;color:#FFFFFF">禾禾美学馆少年参观团</a>
+            <a id="bannerWord3" target="_blank" style="cursor:pointer;width:10%;height:100%;float:left;color:#FFFFFF">禾禾美学馆春季写生掠影</a>
+            <a id="bannerWord4" target="_blank" style="cursor:pointer;width:10%;height:100%;float:left;color:#FFFFFF">禾禾美学馆年度作品盘点</a>
+            <a id="bannerWord5" target="_blank" style="cursor:pointer;width:10%;height:100%;float:left;color:#FFFFFF">禾禾美学馆</a>
+        </div>
+    </div>
+</div>
+<div class="placeholder"></div>
+<div class="content">
+
+</div>
+
+<div class="clear"></div>
+<div class="splitLine"></div>
+<div class="bottom" style="background-color: #F2EFE6;font-weight: bold;color:#0977AC;">
+    <p style="padding:5px;">版权所有 </p>
+    <p style="padding:5px;color:red;">温馨提示：建议使用<a href="https://www.google.cn/chrome/" target="_blank">谷歌浏览器</a>浏览网站</p>
+</div>
+</body>
+</html>
