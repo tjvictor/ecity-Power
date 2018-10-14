@@ -27,11 +27,45 @@ function callAjax(url, iTarget, iCallBack, iCallBackParam, iPost, iParams, iLoad
             }
         },
         error: function(xhr, textStatus) {
-},
+        },
         complete: function(data) {
             $(iLoading).css('display', 'none');
         }
     });
+}
+
+function getWxShareConfigCallback(data){
+    if(data.status == "ok" && data.callBackData){
+        wx.config({
+            debug: data.callBackData.debug=="0"?false:true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: data.callBackData.appId, // 必填，公众号的唯一标识
+            timestamp: parseInt(data.callBackData.timestamp), // 必填，生成签名的时间戳
+            nonceStr: data.callBackData.nonceStr, // 必填，生成签名的随机串
+            signature: data.callBackData.signature,// 必填，签名
+            jsApiList: data.callBackData.jsApiList // 必填，需要使用的JS接口列表
+        });
+
+        wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+            //自定义“分享给朋友”及“分享到QQ”按钮的分享内容（1.4.0）
+            wx.updateAppMessageShareData({
+                title: '禾禾美学馆', // 分享标题
+                desc: '我们认为，学习艺术不只是培养艺术家，而是让每个孩子能通过艺术的启发，提高创意能力，找到自己的价值、发现独特的自己，让艺术融入生活', // 分享描述
+                link: 'http://www.ecity-power.com/heheArt/index.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: 'http://www.ecity-power.com/heheArt/res/img/teacher/liubo.png', // 分享图标
+            }, function(res) {
+                //这里是回调函数
+            });
+
+            //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容（1.4.0）
+            wx.updateTimelineShareData({
+                    title: '禾禾美学馆', // 分享标题
+                    link: 'http://www.ecity-power.com/heheArt/index.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: 'http://www.ecity-power.com/heheArt/res/img/teacher/liubo.png', // 分享图标
+            }, function(res) {
+                //这里是回调函数
+            });
+        });
+    }
 }
 
 $('.hehe-login-button').on('click', function(){

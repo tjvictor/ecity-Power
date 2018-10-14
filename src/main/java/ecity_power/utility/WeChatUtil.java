@@ -77,7 +77,7 @@ public class WeChatUtil {
      * @param byteArray
      * @return
      */
-    private static String byteToStr(byte[] byteArray) {
+    public static String byteToStr(byte[] byteArray) {
         String strDigest = "";
         for (int i = 0; i < byteArray.length; i++) {
             strDigest += byteToHexStr(byteArray[i]);

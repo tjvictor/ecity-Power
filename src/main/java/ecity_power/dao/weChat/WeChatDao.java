@@ -1,10 +1,6 @@
 package ecity_power.dao.weChat;
 
-import ecity_power.model.weChat.Activity;
-import ecity_power.model.weChat.Activity_Participate;
-import ecity_power.model.weChat.Activity_Register;
-import ecity_power.model.weChat.OauthToken;
-import ecity_power.model.weChat.SNSUserInfo;
+import ecity_power.model.weChat.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -29,6 +25,8 @@ public interface WeChatDao {
 
     Activity_Participate getActivityParticipatesByActivityRegisterIdAndParticipateId(String activityRegisterId, String participateId) throws SQLException;
 
+    JSApiTicket getJSApiTicketByAppId(String appId) throws SQLException;
+
     boolean isRegisterExist(String activityId, String registerId) throws SQLException;
 
     boolean isParticipateExist(String activityRegisterId, String participateId) throws SQLException;
@@ -38,5 +36,7 @@ public interface WeChatDao {
     void replaceOauthToken(OauthToken item) throws SQLException;
 
     void replaceSNSUserInfo(SNSUserInfo item) throws SQLException;
+
+    void replaceJSApiTicket(JSApiTicket item) throws SQLException;
 }
 

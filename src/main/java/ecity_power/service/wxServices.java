@@ -2,15 +2,7 @@ package ecity_power.service;
 
 import ecity_power.dao.weChat.WeChatDao;
 import ecity_power.model.ResponseObject;
-import ecity_power.model.weChat.Activity;
-import ecity_power.model.weChat.Activity_Participate;
-import ecity_power.model.weChat.Activity_Register;
-import ecity_power.model.weChat.ArticleItem;
-import ecity_power.model.weChat.OauthToken;
-import ecity_power.model.weChat.SNSUserInfo;
-import ecity_power.model.weChat.WeChatContant;
-import ecity_power.model.weChat.WxError;
-import ecity_power.model.weChat.WxResponse;
+import ecity_power.model.weChat.*;
 import ecity_power.utility.DateUtils;
 import ecity_power.utility.WeChatUtil;
 import net.sf.json.JSONObject;
@@ -27,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -40,6 +33,7 @@ public class wxServices {
 
     @Autowired
     private WeChatDao weChatDaoImp;
+    //endregion
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(){
@@ -190,6 +184,48 @@ public class wxServices {
     @RequestMapping(value = "/jump", method = RequestMethod.GET)
     public void jump(HttpServletResponse response) throws IOException {
         response.sendRedirect("/test.html");
+    }
+
+    @RequestMapping(value = "/getWxShareConfig", method = RequestMethod.GET)
+    public ResponseObject getWxShareConfig(@RequestParam(value = "url") String url) throws SQLException, NoSuchAlgorithmException {
+        JSApiTicket ticket = weChatDaoImp.getJSApiTicketByAppId(WeChatContant.APP_ID);
+        Date now = new Date();
+        if(ticket == null || now.getTime() > (Long.parseLong(ticket.getTimestamp())+3500)){
+            //ticket is out time, re-fetch.
+            String requestTokenUrl = String.format("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s", WeChatContant.APP_ID, WeChatContant.APP_SECRET);
+            JSONObject jsonTokenObject = WeChatUtil.httpsRequest(requestTokenUrl, "GET", null);
+            if(jsonTokenObject != null){
+                String access_token = jsonTokenObject.getString("access_token");
+                String requestJSApiUrl = String.format("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi", access_token);
+                JSONObject jsonJSApiObject = WeChatUtil.httpsRequest(requestJSApiUrl, "GET", null);
+                if(jsonJSApiObject != null){
+                    ticket = new JSApiTicket();
+                    ticket.setAppId(WeChatContant.APP_ID);
+                    ticket.setTicket(jsonJSApiObject.getString("ticket"));
+                    ticket.setNonceStr(UUID.randomUUID().toString());
+                    ticket.setTimestamp(String.valueOf((new Date()).getTime()));
+                }
+                weChatDaoImp.replaceJSApiTicket(ticket);
+            }
+        }
+
+        WxApiConfig config = new WxApiConfig();
+        config.setDebug("0");
+        config.setAppId(WeChatContant.APP_ID);
+        config.setSignature(ticket.getSignature(url));
+        config.setNonceStr(ticket.getNonceStr());
+        config.setTimestamp(ticket.getTimestamp());
+
+        List<String> interfaceList = new ArrayList<>();
+        interfaceList.add("onMenuShareTimeline");
+        interfaceList.add("onMenuShareAppMessage");
+        interfaceList.add("onMenuShareQQ");
+        interfaceList.add("onMenuShareWeibo");
+        interfaceList.add("onMenuShareQZone");
+        interfaceList.add("updateAppMessageShareData");
+        interfaceList.add("updateTimelineShareData");
+        config.setJsApiList(interfaceList);
+        return new ResponseObject("ok", "查询成功", config);
     }
 
     //region Biz Logic
@@ -504,7 +540,7 @@ public class wxServices {
     }
     //endregion
 
-    //Search Logic
+    //region Search Logic
     @RequestMapping(value = "/getActivity_RegisterByActivityId", method = RequestMethod.GET)
     public ResponseObject getActivity_RegisterByActivityId(@RequestParam(value = "activityId") String activityId){
         try {

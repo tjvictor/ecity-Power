@@ -1,11 +1,7 @@
 package ecity_power.dao.weChat.imp;
 
 import ecity_power.dao.weChat.WeChatDao;
-import ecity_power.model.weChat.Activity;
-import ecity_power.model.weChat.Activity_Participate;
-import ecity_power.model.weChat.Activity_Register;
-import ecity_power.model.weChat.OauthToken;
-import ecity_power.model.weChat.SNSUserInfo;
+import ecity_power.model.weChat.*;
 
 import ecity_power.utility.DateUtils;
 import org.springframework.stereotype.Component;
@@ -223,6 +219,28 @@ public class WeChatDaoImp extends WeChatBaseDao implements WeChatDao {
     }
 
     @Override
+    public JSApiTicket getJSApiTicketByAppId(String appId) throws SQLException {
+        String selectSql = String.format("select AppId, Ticket, NonceStr, TimeStamp from JSApiTicket where AppId = '%s'", appId);
+        try (Connection connection = DriverManager.getConnection(dbActivityConnectString)) {
+            try (Statement stmt = connection.createStatement()) {
+                try(ResultSet rs = stmt.executeQuery(selectSql)) {
+                    if (rs.next()) {
+                        int i = 1;
+                        JSApiTicket item = new JSApiTicket();
+                        item.setAppId(rs.getString(i++));
+                        item.setTicket(rs.getString(i++));
+                        item.setNonceStr(rs.getString(i++));
+                        item.setTimestamp(rs.getString(i++));
+                        return item;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public boolean isRegisterExist(String activityId, String registerId) throws SQLException {
         String selectSql = String.format("select count(0) from Activity_Register where ActivityId = '%s' and RegisterId = '%s';" ,activityId, registerId);
         try (Connection connection = DriverManager.getConnection(dbActivityConnectString)) {
@@ -308,6 +326,21 @@ public class WeChatDaoImp extends WeChatBaseDao implements WeChatDao {
                 ps.setString(i++, item.getHeadImgUrl());
                 ps.setString(i++, item.getPrivilegeString());
                 ps.setString(i++, DateUtils.getCurrentDateTime());
+                ps.executeUpdate();
+            }
+        }
+    }
+
+    @Override
+    public void replaceJSApiTicket(JSApiTicket item) throws SQLException {
+        try (Connection connection = DriverManager.getConnection(dbActivityConnectString)){
+            String replaceStr = "replace into JSApiTicket values(?,?,?,?);";
+            try(PreparedStatement ps = connection.prepareStatement(replaceStr)) {
+                int i = 1;
+                ps.setString(i++, item.getAppId());
+                ps.setString(i++, item.getTicket());
+                ps.setString(i++, item.getNonceStr());
+                ps.setString(i++, item.getTimestamp());
                 ps.executeUpdate();
             }
         }
