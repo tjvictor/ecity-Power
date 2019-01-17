@@ -127,7 +127,7 @@
                 <configuration>
                     <jvmArguments>
                         -Dfile.encoding=UTF-8
-                         -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8361
+                        <!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8361-->
                     </jvmArguments>
                 </configuration>
             </plugin>
