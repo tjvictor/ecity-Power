@@ -1,0 +1,95 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+    list-style: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    font-family: ProximaNova,sans-serif;
+}
+
+a:link {color: blue}
+a:visited {color: blue}
+a:hover {color: blue}
+a:active {color: blue}
+
+body {
+    background: #F1F1F1;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.left{
+    float:left;
+}
+.right{
+    float:right;
+}
+
+.clear{
+    clear:both;
+}
+
+.text-middle{
+    vertical-align: middle;
+    text-align: center;
+}
+
+.navBackground{
+    width:100%;
+    height:85px;
+    margin-top:5px;
+    background-color:#000000;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.navDiv{
+    width:1250px;
+    height:85px;
+    background-color:#000000;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.navDiv div{
+     float:right;
+     width:15%;
+     height:85px;
+     color:white;
+     line-height:85px;
+     cursor:pointer;
+ }
+
+ .navDiv div:hover{
+     background-color:#2B3035;
+ }
+
+ .navDiv .navMenuSelected{
+     background-color:#2B3035;
+ }
+
+.divhover:hover{
+    color: white;
+    background-color:#B5B5B5;
+}
+.divhover{
+    width:100%;
+    height:30px;
+    padding:8px;
+    cursor: pointer;
+}
+.divselected {
+    color: white;
+    background-color:#B5B5B5;
+}
+
+.splitLine{
+    margin:5px 0 5px 0;
+    width:100%;
+    height:1px;
+    background-color:#4876FF;
+}
