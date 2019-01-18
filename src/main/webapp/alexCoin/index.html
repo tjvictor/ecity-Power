@@ -5,42 +5,47 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="res/css/webPublic.css">
     <link rel="stylesheet" type="text/css" href="res/css/swiper.css">
-
+    <script src="res/js/jquery-3.3.1.min.js"></script>
     <style>
-    .swiper-container {
-      width: 100%;
-      height: 100%;
-    }
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
+        .swiper-container {
+          width: 100%;
+          height: 100%;
+        }
+        .swiper-slide {
+          text-align: center;
+          font-size: 18px;
+          background: #fff;
 
-      /* Center slide text vertically */
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      align-items: center;
-    }
-  </style>
+          /* Center slide text vertically */
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+        }
+    </style>
+    <script>
+        $(function () {
+            $('.nav').load('view/nav.html');
+        });
+    </script>
 </head>
 <body>
 <div class="navBackground">
     <div id="navDiv" class="navDiv" style="font-weight: bold;">
-        <div id="componentTab" onclick="navSelect(this, 'view/contact.html')">Contact us</div>
-        <div id="shipTab" onclick="navSelect(this, 'view/returns.html')">Returns</div>
-        <div id="notificationTab" onclick="navSelect(this, 'view/selections.html')">Selections</div>
-        <div id="aboutTab" onclick="navSelect(this, 'view/history.html')">History</div>
-        <div id="mainTab" onclick="navSelect(this, 'view/coins.html')">Coins</div>
-        <img src="res/img/logo.png" style="line-height:85px;">
+        <a href="view/contact.html" TARGET="_blank"><div>Contact us</div></a>
+        <a href="view/investment.html" TARGET="_blank"><div>Investment Returns</div></a>
+        <a href="view/selections.html" TARGET="_blank"><div>Selections</div></a>
+        <a href="view/history.html" TARGET="_blank"><div>History</div></a>
+        <a href="view/company.html" TARGET="_blank"><div>Company</div></a>
+        <a href="index.html"><img src="res/img/logo.png"  onerror="this.src='../res/img/logo.png'" style="line-height:85px;cursor:pointer;"></a>
     </div>
 </div>
 <div class="clear"></div>
@@ -73,128 +78,112 @@
 
         </div>
 
-        <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;    display: flex;">
-            <div style="margin-right: 15px;"><img src="res/img/cbusdc-200x135.jpg"></div>
-            <div style="flex: 1;">
-                <p style="font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">Circle’s USDC Stablecoin Fully Dollar Backed, Says Latest Auditor’s Report</p>
-                <p>Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
+        <a href="view/yuandatou.html" target="_blank">
+            <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;display: flex;">
+                <div style="margin-right: 15px;"><img src="res/img/cbusdc-200x135.jpg"></div>
+                <div style="flex: 1;">
+                    <p style="color: black;font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">袁大头</p>
+                    <p style="color: black;">Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
+                </div>
             </div>
-        </div>
-        <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;    display: flex;">
-            <div style="margin-right: 15px;"><img src="res/img/seedcx-200x135.jpg"></div>
-            <div style="flex: 1;">
-                <p style="font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">Circle’s USDC Stablecoin Fully Dollar Backed, Says Latest Auditor’s Report</p>
-                <p>Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
+        </a>
+        <a href="view/daqingyinbi.html" target="_blank">
+            <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;    display: flex;">
+                <div style="margin-right: 15px;"><img src="res/img/seedcx-200x135.jpg"></div>
+                <div style="flex: 1;">
+                    <p style="color: black;font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">大清银币宣统三年曲须龙</p>
+                    <p style="color: black;">Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
+                </div>
             </div>
-        </div>
-        <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;    display: flex;">
-            <div style="margin-right: 15px;"><img src="res/img/seedcx-200x135.jpg"></div>
-            <div style="flex: 1;">
-                <p style="font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">Circle’s USDC Stablecoin Fully Dollar Backed, Says Latest Auditor’s Report</p>
-                <p>Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
+        </a>
+        <a href="view/guangxuyuanbao.html" target="_blank">
+            <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;    display: flex;">
+                <div style="margin-right: 15px;"><img src="res/img/seedcx-200x135.jpg"></div>
+                <div style="flex: 1;">
+                    <p style="color: black;font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">光绪元宝广东省造七钱二分</p>
+                    <p style="color: black;">Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
+                </div>
             </div>
-        </div>
-        <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;    display: flex;">
-            <div style="margin-right: 15px;"><img src="res/img/seedcx-200x135.jpg"></div>
-            <div style="flex: 1;">
-                <p style="font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">Circle’s USDC Stablecoin Fully Dollar Backed, Says Latest Auditor’s Report</p>
-                <p>Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
+        </a>
+        <a href="view/sunzhongshan.html" target="_blank">
+            <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;    display: flex;">
+                <div style="margin-right: 15px;"><img src="res/img/seedcx-200x135.jpg"></div>
+                <div style="flex: 1;">
+                    <p style="color: black;font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">中华民国开国纪念币 孙小头  </p>
+                    <p style="color: black;">Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
+                </div>
             </div>
-        </div>
-        <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;    display: flex;">
-            <div style="margin-right: 15px;"><img src="res/img/seedcx-200x135.jpg"></div>
-            <div style="flex: 1;">
-                <p style="font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">Circle’s USDC Stablecoin Fully Dollar Backed, Says Latest Auditor’s Report</p>
-                <p>Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
-            </div>
-        </div>
-        <div style="padding: 10px 0 7px 0; border-bottom: 1px solid #e8e8e8;    display: flex;">
-            <div style="margin-right: 15px;"><img src="res/img/seedcx-200x135.jpg"></div>
-            <div style="flex: 1;">
-                <p style="font-weight: bold;font-size: 22px;line-height: 26px;margin-bottom: 14px">Circle’s USDC Stablecoin Fully Dollar Backed, Says Latest Auditor’s Report</p>
-                <p>Crypto finance startup Circle’s USDC stablecoin was fully backed with fiat reserves at the close of 2018, according to auditing firm Grant Thornton.</p>
-            </div>
-        </div>
-
+        </a>
     </div>
     <div class="right" style="width:370px;padding:10px;color:white; background-color:#000000;">
         <div class="text-middle" style="font-weight: bold;font-size:18px;color:white;width:100%;height:80px;line-height:80px;">
             Trading Selections
         </div>
-        <div class="text-middle" style="padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
-            <div class="left" style="color:red;font-size:56px;width:60px;">
-                B
-            </div>
-            <div class="left" style="margin-left:20px;">
-                <span style="font-size:24px;color:#E5C24A">AAAAA -</span>  <span style="font-size:24px;color:red">$52,000</span>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <div class="text-middle" style="padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
-            <div class="left" style="color:green;font-size:56px;width:60px;">
+        <div style="display:flex;padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
+            <div style="color:green;font-size:70px;">
                 S
             </div>
-            <div class="left" style="margin-left:20px;">
-                <span style="font-size:24px;color:#E5C24A">BBBBB -</span>  <span style="font-size:24px;color:green">$51,000</span>
+            <div style="margin-left:20px;">
+                <p style="font-size:16px;color:#E5C24A;line-height:45px;">光绪元宝吉林省造七钱二分</p>
+                <p style="font-size:18px;color:red;line-height:25px;">SGD $60,000</p>
             </div>
-            <div class="clear"></div>
         </div>
-        <div class="text-middle" style="padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
-            <div class="left" style="color:red;font-size:56px;width:60px;">
-                B
-            </div>
-            <div class="left" style="margin-left:20px;">
-                <span style="font-size:24px;color:#E5C24A">CCCCC -</span>  <span style="font-size:24px;color:red">$50,000</span>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <div class="text-middle" style="padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
-            <div class="left" style="color:red;font-size:56px;width:60px;">
-                B
-            </div>
-            <div class="left" style="margin-left:20px;">
-                <span style="font-size:24px;color:#E5C24A">DDDDD -</span>  <span style="font-size:24px;color:red">$56,000</span>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <div class="text-middle" style="padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
-            <div class="left" style="color:green;font-size:56px;width:60px;">
+        <div style="display:flex;padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
+            <div style="color:green;font-size:70px;">
                 S
             </div>
-            <div class="left" style="margin-left:20px;">
-                <span style="font-size:24px;color:#E5C24A">EEEEE -</span>  <span style="font-size:24px;color:green">$60,000</span>
+            <div style="margin-left:20px;">
+                <p style="font-size:16px;color:#E5C24A;line-height:45px;">光绪元宝湖南省造七钱二分</p>
+                <p style="font-size:18px;color:red;line-height:25px;">SGD $62,000</p>
             </div>
-            <div class="clear"></div>
         </div>
-        <div class="text-middle" style="padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
-            <div class="left" style="color:green;font-size:56px;width:60px;">
+        <div style="display:flex;padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
+            <div style="color:green;font-size:70px;">
                 S
             </div>
-            <div class="left" style="margin-left:20px;">
-                <span style="font-size:24px;color:#E5C24A">FFFFF -</span>  <span style="font-size:24px;color:green">$70,000</span>
+            <div style="margin-left:20px;">
+                <p style="font-size:16px;color:#E5C24A;line-height:45px;">光绪元宝湖北省造七钱二分</p>
+                <p style="font-size:18px;color:red;line-height:25px;">SGD $65,000</p>
             </div>
-            <div class="clear"></div>
+        </div>
+        <div style="display:flex;padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
+            <div style="color:green;font-size:70px;">
+                S
+            </div>
+            <div style="margin-left:20px;">
+                <p style="font-size:16px;color:#E5C24A;line-height:45px;">光绪元宝浙江省造七钱二分</p>
+                <p style="font-size:18px;color:red;line-height:25px;">SGD $68,000</p>
+            </div>
+        </div>
+        <div style="display:flex;padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
+            <div style="color:green;font-size:70px;">
+                S
+            </div>
+            <div style="margin-left:20px;">
+                <p style="font-size:16px;color:#E5C24A;line-height:45px;">光绪元宝广东省造七钱二分</p>
+                <p style="font-size:18px;color:red;line-height:25px;">SGD $70,000</p>
+            </div>
+        </div>
+        <div style="display:flex;padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
+            <div style="color:green;font-size:70px;">
+                S
+            </div>
+            <div style="margin-left:20px;">
+                <p style="font-size:16px;color:#E5C24A;line-height:45px;">中华民国开国纪念币 孙小头</p>
+                <p style="font-size:18px;color:red;line-height:25px;">SGD $72,000</p>
+            </div>
+        </div>
+        <div style="display:flex;padding:0 20px 0 20px;margin-top:1px;background-color:#2C3435;width:100%;height:80px;line-height:80px;">
+            <div style="color:green;font-size:70px;">
+                S
+            </div>
+            <div style="margin-left:20px;">
+                <p style="font-size:16px;color:#E5C24A;line-height:45px;">大清银币宣统三年曲须龙 </p>
+                <p style="font-size:18px;color:red;line-height:25px;">SGD $80,000</p>
+            </div>
         </div>
     </div>
     <div class="clear"></div>
-</div>
-
-<div id="bottomDiv" class="text-middle" style="width:100%;height:113px;background-color: #000000;font-weight: bold;color:white;">
-    <div style="margin:0 auto;width:1250px;text-align: center;">
-            <div href="https://www.coindesk.com/about" style="width:10%;float:left;height:113px;line-height:113px;">About</div>
-            <div href="https://www.coindesk.com/press" style="width:10%;float:left;height:113px;line-height:113px;">Press</div>
-            <div href="https://www.coindesk.com/editorial-policy" style="width:10%;float:left;height:113px;line-height:113px;">Editorial policy</div>
-            <div href="https://www.coindesk.com/comments-policy" style="width:10%;float:left;height:113px;line-height:113px;">Comments policy</div>
-            <div style="width:10%;float:left;">
-                <img src="res/img/bottomLogo.png" alt="CoinDesk logo" style="height:80px;" >
-            </div>
-            <div href="https://www.coindesk.com/terms-conditions" style="width:10%;float:left;height:113px;line-height:113px;">Terms</div>
-            <div href="https://www.coindesk.com/privacy-policy" style="width:10%;float:left;height:113px;line-height:113px;">Privacy policy</div>
-            <div href="https://jobs.coindesk.com/employer-details/16/coindesk-inc-/" style="width:10%;float:left;height:113px;line-height:113px;">Jobs</div>
-            <div href="https://www.coindesk.com/advertising" style="width:10%;float:left;height:113px;line-height:113px;">Advertising</div>
-            <div href="https://www.coindesk.com/newsletters" style="width:10%;float:left;height:113px;line-height:113px;">Newsletters</div>
-        <div class="clear"></div>
-    </div>
 </div>
 
 
